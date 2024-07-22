@@ -1,11 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
 import json
-if __name__ == "__main__":
-    from app import app
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+import os
+
 app = Flask(__name__)
-
-
 
 def load_products():
     try:
@@ -52,5 +49,5 @@ def calculate_price():
             total_cost += hours * 10
     return render_template('calculate_price.html', products=products, total_cost=total_cost, selected_products=selected_products)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
