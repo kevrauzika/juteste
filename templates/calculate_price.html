@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calcular Preço de Venda</title>
+</head>
+<body>
+    <h1>Calcular Preço de Venda</h1>
+    <form method="post">
+        {% for product in products %}
+            <label for="quantity_{{ product.name }}">Quantidade de {{ product.name }} (R$ {{ product.price }} por unidade):</label>
+            <input type="number" id="quantity_{{ product.name }}" name="quantity_{{ product.name }}" step="0.01"><br>
+        {% endfor %}
+        <label for="hours">Horas Trabalhadas:</label>
+        <input type="number" id="hours" name="hours" step="0.1" required><br>
+        <button type="submit">Calcular</button>
+    </form>
+    {% if total_cost %}
+        <h2>Preço Total: R$ {{ total_cost }}</h2>
+        <h3>Produtos Selecionados:</h3>
+        <ul>
+            {% for product in selected_products %}
+                <li>{{ product.quantity }} de {{ product.name }} a R$ {{ product.price }} cada</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <a href="{{ url_for('index') }}">Voltar</a>
+</body>
+</html>
