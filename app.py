@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
 import json
 import os
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 
@@ -14,7 +16,11 @@ def load_products():
 def save_products(products):
     with open('products.json', 'w') as file:
         json.dump(products, file, indent=4)
-
+        
+@app.route('/')
+def index():
+    app.logger.debug('Acessando a página inicial.')
+    return render_template('index.html')
 @app.route('/')
 def index():
     return render_template('index.html')
